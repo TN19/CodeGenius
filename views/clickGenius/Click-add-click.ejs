@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('Click-head', {title: 'My Click – ClickGenius' }); %>
+</head>
+<body>
+    <%- include('Click-header') %>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="container-form">
+                    <form method="post" action="/clickgenius/add-click">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text domain">Domain Name</span>
+                            <input name="domain" type="text" class="form-control" id="domainInput" placeholder="http://xxxxx.com or http://127.0.0.1">
+                            <button type="button" class="btn custom-btn" id="setLocalhost">L</button>
+                        </div>
+                        <div id="inputContainer">
+                            <div class="input-group mb-3">
+                                <div class="row w-100">
+                                    <div class="col d-flex flex-column align-items-start">
+                                        <div class="fixed-left">
+                                            <span class="input-group-text">Test 1</span>
+                                            <div class="input-group-inner">
+                                                <input id="test1" name="test[]" type="text" class="form-control small-input" placeholder="/xxxxx">
+                                                <select class="input-group-text small-select" name="methods[]">
+                                                    <option value="get">GET</option>
+                                                    <option value="post">POST</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col d-flex flex-column align-items-start">
+                                        <div class="params-wrapper">
+                                            <div class="params-container">
+                                            </div>
+                                            <button type="button" class="transparent-btn d-none" data-test-id="test1" id="addParam">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="transparent-btn" id="addInput">
+                            <img src="images/bootstrap icons/add.svg" alt="Add Test">
+                        </button>
+                        <hr>
+                        <button type="submit" class="btn custom-btn">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addDeleteButton(container) {
+            var deleteButton = document.createElement('button');
+            deleteButton.setAttribute('type', 'button');
+            deleteButton.classList.add('btn', 'custom-btn', 'deleteInput');
+            deleteButton.innerText = 'X';
+            container.appendChild(deleteButton);
+        }
+
+        function updateTestNumbers() {
+            var allInputs = document.querySelectorAll('[name="test[]"]');
+            var deleteButtons = document.querySelectorAll('.deleteInput');
+            var inputContainer = document.getElementById('inputContainer');
+
+            allInputs.forEach(function (input, index) {
+                var group = input.closest('.input-group');
+                group.querySelector('.input-group-text').innerText = 'Test ' + (index + 1);
+
+                if (index !== allInputs.length - 1 && deleteButtons[index]) {
+                    deleteButtons[index].remove();
+                }
+
+                if (index === allInputs.length - 1 && !deleteButtons[index] && index != 0) {
+                    addDeleteButton(group);
+                }
+            });
+        }
+
+        document.getElementById('addInput').addEventListener('click', function () {
+            var inputContainer = document.getElementById('inputContainer');
+            if (inputContainer) {
+                var newInputDiv = document.createElement('div');
+                newInputDiv.classList.add('input-group', 'mb-3');
+                var testCount = document.querySelectorAll('[name="test[]"]').length + 1;
+                newInputDiv.innerHTML =`
+                    <div class="row w-100">
+                        <div class="col d-flex flex-column align-items-start">
+                            <div class="fixed-left">
+                                <span class="input-group-text">Test ${testCount}</span>
+                                <div class="input-group-inner">
+                                    <input id="test${testCount}" name="test[]" type="text" class="form-control small-input" placeholder="/xxxxx">
+                                        <select class="input-group-text small-select" name="methods[]">
+                                            <option value="get">GET</option>
+                                            <option value="post">POST</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-column align-items-start">
+                            <div class="params-wrapper">
+                                <div class="params-container">
+                                </div>
+                                <button type="button" class="transparent-btn d-none" data-test-id="test${testCount}" id="addParam">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                inputContainer.appendChild(newInputDiv);
+                updateTestNumbers();
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('deleteInput')) {
+                var inputGroup = event.target.closest('.input-group');
+                inputGroup.remove();
+                updateTestNumbers();
+            }
+
+            if (event.target.id === 'addParam') {
+                var testInputId = event.target.getAttribute('data-test-id');
+                var testInput = document.getElementById(testInputId);
+                if (testInput) {
+                    // Extract the number from the ID
+                    var testNumber = testInputId.match(/\d+$/)[0];
+                    console.log('Test input number:', testNumber);
+
+                    var paramsContainer = event.target.closest('.input-group').querySelector('.params-container');
+                    if (paramsContainer) {
+                        var paramCount = paramsContainer.querySelectorAll('.parameter-input').length + 1;
+                        var newParamDiv = document.createElement('div');
+                        newParamDiv.classList.add('parameter-input');
+                        newParamDiv.innerHTML = `
+                        <input type="text" class="form-control small-input" name="name${testNumber}[]" placeholder="Name">
+                        <input type="text" class="form-control small-input" name="value${testNumber}[]" placeholder="Value">
+                        <button type="button" class="btn delete-param">X</button>
+                        `;
+                        paramsContainer.appendChild(newParamDiv);
+                    }
+                }
+            }
+
+            if (event.target.classList.contains('delete-param')) {
+                var paramContainer = event.target.closest('.params-container');
+                event.target.closest('.parameter-input').remove();
+
+                // Show the "Add Param" button again if there are no more params
+                if (paramContainer.querySelectorAll('.parameter-input').length === 0) {
+                    var addParamButton = paramContainer.previousElementSibling;
+                    if (addParamButton) {
+                        addParamButton.style.display = 'inline-block';
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('change', function (event) {
+            if (event.target.name === 'methods[]') {
+                var inputGroup = event.target.closest('.input-group');
+                var addParamBtn = inputGroup.querySelector('#addParam');
+                if (addParamBtn) {
+                    if (event.target.value === 'post') {
+                        addParamBtn.classList.remove('d-none');
+                    } else {
+                        addParamBtn.classList.add('d-none');
+                        // Hide all params when switching to GET
+                        var paramsContainer = inputGroup.querySelector('.params-container');
+                        if (paramsContainer) {
+                            paramsContainer.innerHTML = '';
+                        }
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const setLocalhostButton = document.getElementById('setLocalhost');
+            const domainInput = document.getElementById('domainInput');
+
+            setLocalhostButton.addEventListener('click', function () {
+                domainInput.value = 'http://127.0.0.1';
+            });
+        });
+    </script>
+</body>
+</html>

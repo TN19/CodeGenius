@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('Code-head', {title: 'CodeGenius: Become an IT genius' }); %>
+        <style>
+            body {
+                background-color: #000;
+                color: #fff;
+            }
+
+            .custom-card {
+                border: 1px solid #fff;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .custom-card .card-text {
+                color: #fff;
+            }
+
+            .custom-btn {
+                border: 1px solid #fff;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .custom-btn:hover {
+                background-color: #fff;
+                color: #000;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('Code-header') %>
+        <main class="container">
+            <div class="d-flex justify-content-center">
+                <div class="col-md-8">
+                    <h1 class="text-center">Support ticket</h1>
+                    <hr>
+
+                    <form method="post" action="/resolve_ticket">
+                        <input type="hidden" name="id" value="">
+
+
+                        <div>
+                            <div class="mb-3">
+                                <label for="title" class="form-label"><strong>Title:</strong></label>
+                                <input type="text" id="title" name="title" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="content" class="form-label"><strong>Content:</strong></label>
+                                <textarea id="content" name="content" class="form-control" rows="5" required></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" name="resolve" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <%- include('Code-footer') %>
+</body>
+
+</html>

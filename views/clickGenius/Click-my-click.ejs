@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include('Click-head', {title: 'My Click – ClickGenius' }); %>
+</head>
+
+<body>
+    <%- include('Click-header') %>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <% if (success) { %>
+                    <div class="alert alert-success text-center border border-success">
+                        <%= success %>
+                    </div>
+                <% } if (error) { %>
+                    <div class="alert alert-error text-center" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if (tests && tests.length > 0) { %>
+                    <% tests.forEach(function (domainData, i) { %>
+                        <div class="container-form">
+                            <form id="form<%= i + 1 %>" method="post" action="/clickgenius/my-click">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text domain">Domain Name</span>
+                                    <input name="domain" type="text" class="form-control" value="<%= domainData.domain %>" readonly>
+                                    <input name="domain_id" type="hidden" class="form-control" value="<%= domainData.domain_id %>">
+                                </div>
+                                <% domainData.tests.forEach(function (test, j) { %>
+                                    <div id="inputContainer">
+                                        <div class="input-group mb-3">
+                                            <div class="row w-100">
+                                                <div class="col d-flex flex-column align-items-start">
+                                                    <div class="fixed-left">
+                                                        <span class="input-group-text">Test <%= j + 1 %></span>
+                                                        <div class="input-group-inner">
+                                                            <input name="test[]" type="text" class="form-control small-input" value="<%= test.testUrl %>" readonly>
+                                                            <input class="form-control small-select" name="methods[]" value="<%= test.method %>" readonly>
+                                                            <img src="<%= test.resultImage %>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col d-flex flex-column align-items-start">
+                                                    <div class="params-wrapper">
+                                                        <div class="params-container">
+                                                            <% if (test.method === 'post') { 
+                                                                test.name.forEach(function (formName, k) { %>
+                                                                    <div class="parameter-input">
+                                                                        <input type="text" class="form-control small-input" name="name<%= j + 1 %>[]" value="<%= formName %>" readonly>
+                                                                        <input type="text" class="form-control small-input" name="value<%= j + 1 %>[]" value="<%= test.value[k] %>" readonly>
+                                                                    </div>
+                                                                <% }) 
+                                                            } %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                                <button type="submit" class="btn custom-btn">Send</button>
+                            </form>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="alert alert-info text-center">
+                        No clicks found
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    $(document).ready(function () {
+        $('.custom-btn').click(function (e) {
+            e.preventDefault(); 
+            const formId = $(this).closest('form').attr('id');
+            $('#' + formId).submit();
+        });
+    });
+</script>
+
+</html>

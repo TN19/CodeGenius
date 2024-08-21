@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('Code-head', {title: 'CodeGenius: Become an IT genius' }); %>
+        <style>
+            body {
+                background-color: #000;
+                color: #fff;
+            }
+
+            .custom-card {
+                border: 1px solid #fff;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .custom-card .card-text {
+                color: #fff;
+            }
+
+            .custom-btn {
+                border: 1px solid #fff;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .custom-btn:hover {
+                background-color: #fff;
+                color: #000;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('Code-header') %>
+        <main class="container">
+            <div class="container py-5">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h2 class="display-4">Welcome to codeGenius!</h2>
+                        <p class="lead">Unlock your potential with our innovative platforms.</p>
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Automate Web Testing with clickGenius</h3>
+                                <p class="card-text">Effortlessly automate your web platform testing and ensure flawless
+                                    performance.</p>
+                                <a href="/clickGenius" class="btn btn-primary custom-btn" target="_blank">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                        <img src="images/homeImage.jpg" alt="Illustration" class="img-fluid">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="display-5 mb-4">Why Choose codeGenius?</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Efficiency</h3>
+                                <p class="card-text">Save time and resources with our automated testing and streamlined
+                                    learning process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Quality</h3>
+                                <p class="card-text">Ensure high-quality performance with our comprehensive testing
+                                    solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Flexibility</h3>
+                                <p class="card-text">Customize your testing strategies and learning path to suit your
+                                    unique needs and goals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container py-5">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h2 class="display-5 mb-4 text-white">What Our Users Say</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <p class="card-text">"codeGenius transformed the way we conduct testing. It's intuitive,
+                                    efficient, and highly reliable."</p>
+                                <p class="card-text">- John Doe, CEO at TechCo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <p class="card-text">"The course selection on codeGenius is impressive. I found exactly
+                                    what I needed to enhance my skills."</p>
+                                <p class="card-text">- Jane Smith, Web Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <p class="card-text">"The support team at codeGenius is top-notch. They are always there
+                                    to assist with any issues or questions."</p>
+                                <p class="card-text">- Alex Johnson, QA Specialist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="display-5 mb-4 text-white">Explore More</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Community Forum</h3>
+                                <p class="card-text">Connect with fellow users, ask questions, and share knowledge on
+                                    our community forum.</p>
+                                <a href="/coursegenius/forum" class="btn btn-primary custom-btn" target="_blank">Join Forum</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title">FAQs</h3>
+                                <p class="card-text">Need help? Visit our FAQs for explore more information.</p>
+                                <a href="/faq" class="btn btn-primary custom-btn">Visit FAQs</a>
+                            </div>
+                        </div>
+                    </div>
+                                      
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Customer Support</h3>
+                                <p class="card-text">Reach out to our dedicated customer support team for assistance.
+                                </p>
+                                <a href="/support" class="btn btn-primary custom-btn">Contact Support</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <%- include('Code-footer') %>
+        </main>
+</body>
+
+</html>

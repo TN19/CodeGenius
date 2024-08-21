@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+    <div class="container">
+        <a href="/clickgenius"><img src="images/logo.png" width="72" height="57"></a>
+        <a class="navbar-brand" href="/clickgenius">ClickGenius</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/clickgenius">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/clickgenius/my-click">My Click</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/clickgenius/add-click">Add Click</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <% if (loggedin) { %>
+                            <%= name %>
+                                <% } else { %>
+                                    User
+                                    <% } %>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <% if (loggedin) { %>
+                            <li><a class="dropdown-item" href="/clickGenius/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/clickGenius/logout">Logout</a></li>
+                            <% } else { %>
+                                <li><a class="dropdown-item" href="/clickGenius/sign-in">Sign in</a></li>
+                                <li><a class="dropdown-item" href="/clickGenius/sign-up">Sign up</a></li>
+                                <% } %>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

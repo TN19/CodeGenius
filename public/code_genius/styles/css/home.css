@@ -1,0 +1,20 @@
+.jumbotron {
+    background-color: #343a40;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+.card {
+    transition: transform 0.3s ease;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-date {
+    font-size: 0.7rem;
+}
