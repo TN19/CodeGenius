@@ -9,7 +9,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="container-form">
-                    <form method="post" action="/clickgenius/add-click">
+                    <form method="post" action="/clickgenius/add-click" enctype="multipart/form-data">
                         <div class="input-group mb-3">
                             <span class="input-group-text domain">Domain Name</span>
                             <input name="domain" type="text" class="form-control" id="domainInput" placeholder="http://xxxxx.com or http://127.0.0.1">
@@ -32,9 +32,8 @@
                                     </div>
                                     <div class="col d-flex flex-column align-items-start">
                                         <div class="params-wrapper">
-                                            <div class="params-container">
-                                            </div>
-                                            <button type="button" class="transparent-btn d-none" data-test-id="test1" id="addParam">+</button>
+                                            <div class="params-container"></div>
+                                            <button type="button" class="transparent-btn d-none addParam" data-test-id="test1">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +62,6 @@
         function updateTestNumbers() {
             var allInputs = document.querySelectorAll('[name="test[]"]');
             var deleteButtons = document.querySelectorAll('.deleteInput');
-            var inputContainer = document.getElementById('inputContainer');
 
             allInputs.forEach(function (input, index) {
                 var group = input.closest('.input-group');
@@ -73,7 +71,7 @@
                     deleteButtons[index].remove();
                 }
 
-                if (index === allInputs.length - 1 && !deleteButtons[index] && index != 0) {
+                if (index === allInputs.length - 1 && !deleteButtons[index] && index !== 0) {
                     addDeleteButton(group);
                 }
             });
@@ -85,7 +83,7 @@
                 var newInputDiv = document.createElement('div');
                 newInputDiv.classList.add('input-group', 'mb-3');
                 var testCount = document.querySelectorAll('[name="test[]"]').length + 1;
-                newInputDiv.innerHTML =`
+                newInputDiv.innerHTML = `
                     <div class="row w-100">
                         <div class="col d-flex flex-column align-items-start">
                             <div class="fixed-left">
@@ -101,13 +99,11 @@
                         </div>
                         <div class="col d-flex flex-column align-items-start">
                             <div class="params-wrapper">
-                                <div class="params-container">
-                                </div>
-                                <button type="button" class="transparent-btn d-none" data-test-id="test${testCount}" id="addParam">+</button>
+                                <div class="params-container"></div>
+                                <button type="button" class="transparent-btn d-none addParam" data-test-id="test${testCount}">+</button>
                             </div>
                         </div>
-                    </div>
-                    `;
+                    </div>`;
                 inputContainer.appendChild(newInputDiv);
                 updateTestNumbers();
             }
@@ -120,14 +116,11 @@
                 updateTestNumbers();
             }
 
-            if (event.target.id === 'addParam') {
+            if (event.target.classList.contains('addParam')) {
                 var testInputId = event.target.getAttribute('data-test-id');
                 var testInput = document.getElementById(testInputId);
                 if (testInput) {
-                    // Extract the number from the ID
                     var testNumber = testInputId.match(/\d+$/)[0];
-                    console.log('Test input number:', testNumber);
-
                     var paramsContainer = event.target.closest('.input-group').querySelector('.params-container');
                     if (paramsContainer) {
                         var paramCount = paramsContainer.querySelectorAll('.parameter-input').length + 1;
@@ -135,9 +128,12 @@
                         newParamDiv.classList.add('parameter-input');
                         newParamDiv.innerHTML = `
                         <input type="text" class="form-control small-input" name="name${testNumber}[]" placeholder="Name">
-                        <input type="text" class="form-control small-input" name="value${testNumber}[]" placeholder="Value">
-                        <button type="button" class="btn delete-param">X</button>
-                        `;
+                        <input type="text" class="form-control small-input param-value" name="value${testNumber}[]" placeholder="Value">
+                        <div class="input-group">
+                            <input type="radio" name="type${testNumber}_${paramCount}" value="text" checked> Text
+                            <input type="radio" name="type${testNumber}_${paramCount}" value="file"> File
+                        </div>
+                        <button type="button" class="btn delete-param">X</button>`;
                         paramsContainer.appendChild(newParamDiv);
                     }
                 }
@@ -147,7 +143,6 @@
                 var paramContainer = event.target.closest('.params-container');
                 event.target.closest('.parameter-input').remove();
 
-                // Show the "Add Param" button again if there are no more params
                 if (paramContainer.querySelectorAll('.parameter-input').length === 0) {
                     var addParamButton = paramContainer.previousElementSibling;
                     if (addParamButton) {
@@ -160,13 +155,12 @@
         document.addEventListener('change', function (event) {
             if (event.target.name === 'methods[]') {
                 var inputGroup = event.target.closest('.input-group');
-                var addParamBtn = inputGroup.querySelector('#addParam');
+                var addParamBtn = inputGroup.querySelector('.addParam');
                 if (addParamBtn) {
                     if (event.target.value === 'post') {
                         addParamBtn.classList.remove('d-none');
                     } else {
                         addParamBtn.classList.add('d-none');
-                        // Hide all params when switching to GET
                         var paramsContainer = inputGroup.querySelector('.params-container');
                         if (paramsContainer) {
                             paramsContainer.innerHTML = '';
@@ -174,16 +168,32 @@
                     }
                 }
             }
+
+            if (event.target.name.startsWith('type')) {
+                var paramGroup = event.target.closest('.parameter-input');
+                var valueInput = paramGroup.querySelector('.param-value');
+
+                if (event.target.value === 'file') {
+                    var fileInput = document.createElement('input');
+                    fileInput.setAttribute('type', 'file');
+                    fileInput.setAttribute('class', 'form-control small-input param-value');
+                    fileInput.setAttribute('name', valueInput.name);
+                    valueInput.replaceWith(fileInput);
+                } else {
+                    var textInput = document.createElement('input');
+                    textInput.setAttribute('type', 'text');
+                    textInput.setAttribute('class', 'form-control small-input param-value');
+                    textInput.setAttribute('name', valueInput.name);
+                    textInput.setAttribute('placeholder', 'Value');
+                    valueInput.replaceWith(textInput);
+                }
+            }
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            const setLocalhostButton = document.getElementById('setLocalhost');
-            const domainInput = document.getElementById('domainInput');
-
-            setLocalhostButton.addEventListener('click', function () {
-                domainInput.value = 'http://127.0.0.1';
-            });
+            updateTestNumbers();
         });
     </script>
 </body>
+
 </html>

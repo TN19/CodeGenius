@@ -152,3 +152,188 @@ textarea::placeholder {
 .form-floating .form-control::placeholder {
     color: #40bb5d;
 }
+.parameter-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.parameter-input input {
+    margin-right: 0.5rem;
+    width: 100px;
+    background-color: #000;
+    color: #40bb5d;
+    border: 1px solid #40bb5d;
+}
+
+.parameter-input input::placeholder {
+    color: #da0d0d;
+}
+
+.parameter-input input[type="radio"] {
+    margin: 0 5px;
+    accent-color: #40bb5d;
+}
+
+.parameter-input .delete-param {
+    background-color: #da0d0d;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.parameter-input .delete-param:hover {
+    background-color: #c00;
+}
+
+/* Estilização específica para grupos de inputs de parâmetros */
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #40bb5d;
+}
+
+.input-group label {
+    margin-right: 15px;
+    color: #40bb5d;
+}
+
+/* Manter estilização existente para outros elementos */
+body {
+    background-color: #000;
+    color: #40bb5d;
+}
+
+.custom-card,
+.card-text {
+    color: #40bb5d;
+}
+
+.custom-btn:hover {
+    background-color: #da0d0d;
+    color: #000;
+}
+
+.transparent-btn {
+    background-color: transparent;
+    border: none;
+    color: #40bb5d;
+}
+
+.container-form {
+    border: 1px solid #40bb5d;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.form-control[readonly]:hover {
+    border: 1px solid #da0d0d;
+    background-color: transparent;
+    color: #da0d0d;
+}
+
+.form-control[readonly] {
+    border: 1px solid #40bb5d;
+    background-color: transparent;
+    color: #40bb5d;
+}
+
+.form-control:focus {
+    border: 1px solid #da0d0d;
+    background-color: transparent;
+    color: #da0d0d;
+}
+
+.input-group-text,
+.form-control,
+.custom-btn,
+.custom-card,
+.alert-success {
+    border: 1px solid #40bb5d;
+    background-color: transparent;
+    color: #40bb5d;
+}
+
+.alert-error {
+    border: 1px solid #da0d0d;
+    background-color: transparent;
+    color: #da0d0d;
+}
+
+.small-select {
+    width: 120px;
+}
+
+.input-group {
+    display: flex;
+    align-items: flex-start;
+}
+
+.input-group-text {
+    height: 38px;
+    line-height: 38px;
+    background-color: transparent;
+    color: #40bb5d;
+    white-space: nowrap;
+}
+
+.form-control.small-input {
+    width: 120px;
+}
+
+.fixed-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-group-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.params-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.params-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Cor do placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #da0d0d !important;
+}
+
+/* Ajustes para `form-floating` */
+.form-floating .form-control {
+    background-color: transparent;
+    color: #40bb5d;
+}
+
+.form-floating .form-control::placeholder {
+    color: #40bb5d;
+}

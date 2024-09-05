@@ -28,12 +28,10 @@ app.use(function (req, res, next) {
 app.set('view engine', 'ejs');
 //public
 app.use('/clickgenius', express.static(path.join(__dirname, "/public/click_genius")));
-app.use('/coursegenius', express.static(path.join(__dirname, "/public/course_genius")));
 app.use('/', express.static(path.join(__dirname, "/public/code_genius")));
 //routes
 app.use('/', require('./router/codeGeniusRoutes'));
 app.use('/clickgenius', require('./router/clickGeniusRoutes'));
-app.use('/coursegenius', require('./router/courseGeniusRoutes'));
 //port
 app.listen(3000, () => {
     console.log("Server running on port 3000");

@@ -93,6 +93,7 @@ router.route('/sign-in')
                 req.session.name = result[0].name
                 req.session.loggedin = true
                 req.session.user_id = result[0].id
+                req.session.user_email = result[0].email
                 console.log('Login successful');
                 console.log(result[0]);
                 res.redirect('/clickGenius');
@@ -312,62 +313,94 @@ router.route('/my-click')
     });
 
 
-router.route('/add-click')
+    router.route('/add-click')
     .get((req, res) => {
-        res.render('clickGenius/Click-add-click')
+        res.render('clickGenius/Click-add-click');
     })
-    .post((req, res) => {
+    .post(upload.any(), (req, res) => {
+        console.log(req.files);  // Adicione isso para ver o que está sendo recebido
         console.log(req.body);
+    
         const { test, methods } = req.body;
         const domain = req.body.domain;
         const userId = req.session.user_id;
-
+    
+        if (!domain || !userId) {
+            return res.status(400).send('Dados faltando: domínio ou ID do usuário.');
+        }
+    
         db.query('INSERT INTO domain (domain) VALUES (?)', [domain], (error, results) => {
             if (error) {
                 console.error('Erro ao inserir domínio:', error);
                 res.status(500).send('Erro ao processar a requisição.');
                 return;
             }
-
+    
             const domainId = results.insertId;
-
+    
             if (Array.isArray(test) && Array.isArray(methods) && test.length === methods.length) {
                 const insertClicks = test.map((url, index) => {
                     const method = methods[index];
                     return new Promise((resolve, reject) => {
-                        db.query('INSERT INTO clicks (id_domain, urls, method) VALUES (?, ?, ?)', [domainId, url, method], (err, res) => {
+                        db.query('INSERT INTO clicks (id_domain, urls, method) VALUES (?, ?, ?)', [domainId, url, method], (err, result) => {
                             if (err) {
                                 console.error('Erro ao inserir URL:', url, err);
                                 reject(err);
                                 return;
                             }
-                            const clickId = res.insertId;
-                            db.query('INSERT INTO user_click (id_user, id_click) VALUES (?, ?)', [userId, clickId], (err, res) => {
+                            const clickId = result.insertId;
+                            db.query('INSERT INTO user_click (id_user, id_click) VALUES (?, ?)', [userId, clickId], (err) => {
                                 if (err) {
                                     console.error('Erro ao criar relacionamento id_user e id_click:', userId, clickId, err);
                                     reject(err);
                                     return;
                                 }
-                                console.log(method)
                                 if (method === "post") {
-                                    console.log('index:' + index)
-                                    const formNames = req.body[`name${index + 1}`] || [];
-                                    const formValues = req.body[`value${index + 1}`] || [];
-                                    if (Array.isArray(formNames) && Array.isArray(formValues) && formNames.length === formValues.length) {
+                                    // Iterar sobre os nomes dos campos de formulário
+                                    const formNames = Array.isArray(req.body[`name${index + 1}`]) ? req.body[`name${index + 1}`] : [];
+                                    const formValues = Array.isArray(req.body[`value${index + 1}`]) ? req.body[`value${index + 1}`] : [];
+                                    const formTypes = Object.keys(req.body)
+                                        .filter(key => key.startsWith(`type${index + 1}_`))
+                                        .map(key => req.body[key]);
+                                    console.log(formNames)
+                                    console.log(formValues)
+                                    console.log(formTypes)
+                                    if (formNames.length === formValues.length) {
                                         const insertFormFields = formNames.map((formName, i) => {
                                             const formValue = formValues[i];
+                                            const formType = formTypes[i] || 'text';
+    
                                             return new Promise((resolve, reject) => {
-                                                db.query('INSERT INTO clicks_post (id_clicks, form_name, form_value) VALUES (?, ?, ?)', [clickId, formName, formValue], (err, res) => {
-                                                    if (err) {
-                                                        console.error('Erro ao inserir dados do post:', method, err);
-                                                        reject(err);
-                                                        return;
+                                                if (formType === 'file') {
+                                                    const file = req.files.find(f => f.fieldname === formValue);
+    
+                                                    if (file) {
+                                                        db.query('INSERT INTO clicks_post (id_clicks, form_name, form_value, value_type) VALUES (?, ?, ?, ?)',
+                                                            [clickId, formName, file.path, 'file'], (err) => {
+                                                                if (err) {
+                                                                    console.error('Erro ao inserir dados do post:', method, err);
+                                                                    reject(err);
+                                                                    return;
+                                                                }
+                                                                resolve();
+                                                            });
+                                                    } else {
+                                                        reject(new Error('Arquivo não encontrado.'));
                                                     }
-                                                    resolve();
-                                                });
+                                                } else {
+                                                    db.query('INSERT INTO clicks_post (id_clicks, form_name, form_value, value_type) VALUES (?, ?, ?, ?)',
+                                                        [clickId, formName, formValue, 'text'], (err) => {
+                                                            if (err) {
+                                                                console.error('Erro ao inserir dados do post:', method, err);
+                                                                reject(err);
+                                                                return;
+                                                            }
+                                                            resolve();
+                                                        });
+                                                }
                                             });
                                         });
-
+    
                                         Promise.all(insertFormFields).then(() => {
                                             console.log('Dados do post inseridos com sucesso:', clickId);
                                             resolve();
@@ -387,23 +420,23 @@ router.route('/add-click')
                         });
                     });
                 });
-
+    
                 Promise.all(insertClicks).then(() => {
                     res.render('clickGenius/Click-add-click');
                 }).catch((error) => {
                     console.error('Erro ao processar a inserção de URLs:', error);
                     res.status(500).send('Erro ao processar a requisição.');
                 });
-
+    
             } else if (typeof test === 'string' && typeof methods === 'string') {
-                db.query('INSERT INTO clicks (id_domain, urls, method) VALUES (?, ?, ?)', [domainId, test, methods], (err, res) => {
+                db.query('INSERT INTO clicks (id_domain, urls, method) VALUES (?, ?, ?)', [domainId, test, methods], (err, result) => {
                     if (err) {
                         console.error('Erro ao inserir URL:', test, err);
                         res.status(500).send('Erro ao processar a requisição.');
                         return;
                     }
-                    const clickId = res.insertId;
-                    db.query('INSERT INTO user_click (id_user, id_click) VALUES (?, ?)', [userId, clickId], (err, res) => {
+                    const clickId = result.insertId;
+                    db.query('INSERT INTO user_click (id_user, id_click) VALUES (?, ?)', [userId, clickId], (err) => {
                         if (err) {
                             console.error('Erro ao criar relacionamento id_user e id_click:', userId, clickId, err);
                             res.status(500).send('Erro ao processar a requisição.');
@@ -413,13 +446,12 @@ router.route('/add-click')
                         res.render('clickGenius/Click-add-click');
                     });
                 });
-
+    
             } else {
                 console.error('Os arrays de testes e métodos não têm o mesmo comprimento ou são inválidos.');
                 res.status(400).send('Requisição inválida.');
             }
         });
     });
-
 
 module.exports = router;
