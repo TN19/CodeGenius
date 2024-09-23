@@ -42,24 +42,25 @@ app.get('/cadastro', (req, res) => {
 app.post('/cadastro', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
-      throw err;
+      return res.status(500).send('Erro ao fazer upload da foto.');
     }
 
     // Extrair dados do corpo da requisição
     const { nome, email, senha } = req.body;
-   
+    const foto = req.file ? req.file.filename : null; // Nome do arquivo da foto
 
     // Inserir dados na tabela de usuários
-    const sql = 'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO usuarios (nome, email, senha, foto) VALUES (?, ?, ?, ?)';
     db.query(sql, [nome, email, senha, foto], (err, result) => {
       if (err) {
-        throw err;
+        return res.status(500).send('Erro ao cadastrar usuário.');
       }
       console.log('Usuário cadastrado com sucesso.');
       res.send('Cadastro realizado com sucesso!');
     });
   });
 });
+
 
 // Iniciar servidor
 app.listen(port, () => {

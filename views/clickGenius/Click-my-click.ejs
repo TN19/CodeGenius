@@ -49,7 +49,14 @@
                                                                 test.name.forEach(function (formName, k) { %>
                                                                     <div class="parameter-input">
                                                                         <input type="text" class="form-control small-input" name="name<%= j + 1 %>[]" value="<%= formName %>" readonly>
-                                                                        <input type="text" class="form-control small-input" name="value<%= j + 1 %>[]" value="<%= test.value[k] %>" readonly>
+                                                                        
+                                                                        <% if (test.valueType[k] === 'file') { %>
+                                                                            <!-- Se for file, exibe botão para abrir o arquivo -->
+                                                                            <button type="button" class="btn btn-primary" onclick="window.open('../ClickGenius/images/users/<%= user_email %>/<%= test.value[k] %>')">Abrir Arquivo</button>
+                                                                        <% } else { %>
+                                                                            <!-- Se for text, exibe o campo de texto -->
+                                                                            <input type="text" class="form-control small-input" name="value<%= j + 1 %>[]" value="<%= test.value[k] %>" readonly>
+                                                                        <% } %>
                                                                     </div>
                                                                 <% }) 
                                                             } %>
@@ -72,8 +79,8 @@
             </div>
         </div>
     </div>
-    
 </body>
+
 <script>
     $(document).ready(function () {
         $('.custom-btn').click(function (e) {

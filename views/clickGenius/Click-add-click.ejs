@@ -127,8 +127,8 @@
                         var newParamDiv = document.createElement('div');
                         newParamDiv.classList.add('parameter-input');
                         newParamDiv.innerHTML = `
-                        <input type="text" class="form-control small-input" name="name${testNumber}[]" placeholder="Name">
-                        <input type="text" class="form-control small-input param-value" name="value${testNumber}[]" placeholder="Value">
+                        <input type="text" class="form-control small-input" name="name${testNumber}[]" placeholder="Name" require>
+                        <input type="text" class="form-control small-input param-value" name="value${testNumber}[]" placeholder="Value" require>
                         <div class="input-group">
                             <input type="radio" name="type${testNumber}_${paramCount}" value="text" checked> Text
                             <input type="radio" name="type${testNumber}_${paramCount}" value="file"> File
@@ -193,6 +193,16 @@
         document.addEventListener('DOMContentLoaded', function () {
             updateTestNumbers();
         });
+
+
+        function setLocalhost() {
+            document.getElementById('domainInput').value = 'http://127.0.0.1';
+        }
+        
+        window.onload = function() {
+            document.getElementById('setLocalhost').addEventListener('click', setLocalhost);
+        }
+
     </script>
 </body>
 

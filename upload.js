@@ -2,6 +2,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// Configuração do multer com renomeação de arquivo
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const userEmail = req.session.user_email; // Assumindo que o e-mail do usuário está na sessão
@@ -16,10 +17,16 @@ const storage = multer.diskStorage({
         cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        // Renomear o arquivo, por exemplo, usando a data atual para garantir um nome único
+        const timestamp = Date.now(); // Pega o timestamp atual
+        const fileExtension = path.extname(file.originalname); // Pega a extensão original do arquivo
+        const newFilename = `${req.session.user_email}-${timestamp}${fileExtension}`; // Exemplo: "file-1630537608000.png"
+
+        cb(null, newFilename); // Define o novo nome do arquivo
     }
 });
 
 const upload = multer({ storage: storage });
 
 module.exports = upload;
+

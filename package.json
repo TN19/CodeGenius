@@ -1,7 +1,7 @@
 {
   "name": "tcc",
   "version": "1.0.0",
-  "description": "",
+  "description": "- fazer funciona request post\r - fazer validação das páginas\r - excluir toda parte de courseGenius",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,5 +24,9 @@
     "path": "^0.12.7",
     "postman": "^0.2.0",
     "postman-request": "^2.88.1-postman.33"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {}
 }
