@@ -29,11 +29,28 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
+<<<<<<< HEAD
                         <i class="fas fa-user"></i> User
                     </a>
                     <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/clickgenius/sign-in">Sign in</a></li>
                         <li><a class="dropdown-item" href="/clickgenius/sign-up">Sign up</a></li>
+=======
+                        <% if (loggedin) { %>
+                            <%= name %>
+                                <% } else { %>
+                                    User
+                                    <% } %>
+                    </a>
+                    <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
+                        <% if (loggedin) { %>
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <% } else { %>
+                            <li><a class="dropdown-item" href="/sign-in">Sign in</a></li>
+                            <li><a class="dropdown-item" href="/sign-up">Sign up</a></li>
+                            <% } %>
+>>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
                     </ul>
                 </li>
             </ul>

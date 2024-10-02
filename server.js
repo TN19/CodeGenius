@@ -21,7 +21,12 @@ app.use(function (req, res, next) {
     res.locals.resultImage = req.session.resultImage;
     res.locals.name = req.session.name;
     res.locals.loggedin = req.session.loggedin;
+<<<<<<< HEAD
     
+=======
+    res.locals.user_email = req.session.user_email;
+
+>>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
     next();
 })
 //views

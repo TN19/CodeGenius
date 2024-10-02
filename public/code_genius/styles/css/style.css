@@ -1,0 +1,339 @@
+body {
+    background-color: #000;
+    color: #ffffff;
+}
+
+.custom-card,
+.card-text {
+    color: #ffffff;
+}
+
+.custom-btn:hover {
+    background-color: #99ccff;
+    color: #000;
+}
+
+.transparent-btn {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+.container-form {
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.form-control[readonly]:hover {
+    border: 1px solid #99ccff;
+    background-color: transparent;
+    color: #99ccff;
+}
+
+.form-control[readonly] {
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.form-control:focus {
+    border: 1px solid #99ccff;
+    background-color: transparent;
+    color: #99ccff;
+}
+
+.input-group-text,
+.form-control,
+.custom-btn,
+.custom-card,
+.alert-success {
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.alert-error {
+    border: 1px solid #99ccff;
+    background-color: transparent;
+    color: #99ccff;
+}
+
+.small-select {
+    width: 120px;
+}
+
+.input-group {
+    display: flex;
+    align-items: flex-start;
+}
+
+.input-group-text {
+    height: 38px;
+    line-height: 38px;
+    background-color: transparent;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.form-control.small-input {
+    width: 120px;
+}
+
+.fixed-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-group-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.params-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.params-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.parameter-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.parameter-input input {
+    margin-right: 0.5rem;
+    width: 100px;
+}
+
+.parameter-input button {
+    background-color: transparent;
+    border: none;
+    color: #99ccff;
+    cursor: pointer;
+}
+
+.delete-param {
+    color: #99ccff;
+    border: 1px solid #99ccff;
+}
+
+.transparent-btn {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+/* Cor do placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #99ccff !important;
+}
+
+/* Ajustes para `form-floating` */
+.form-floating .form-control {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.form-floating .form-control::placeholder {
+    color: #ffffff;
+}
+.parameter-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.parameter-input input {
+    margin-right: 0.5rem;
+    width: 100px;
+    background-color: #000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.parameter-input input::placeholder {
+    color: #99ccff;
+}
+
+.parameter-input input[type="radio"] {
+    margin: 0 5px;
+    accent-color: #ffffff;
+}
+
+.parameter-input .delete-param {
+    background-color: #99ccff;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.parameter-input .delete-param:hover {
+    background-color: #c00;
+}
+
+/* Estilização específica para grupos de inputs de parâmetros */
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #ffffff;
+}
+
+.input-group label {
+    margin-right: 15px;
+    color: #ffffff;
+}
+
+/* Manter estilização existente para outros elementos */
+body {
+    background-color: #000;
+    color: #ffffff;
+}
+
+.custom-card,
+.card-text {
+    color: #ffffff;
+}
+
+.custom-btn:hover {
+    background-color: #99ccff;
+    color: #000;
+}
+
+.transparent-btn {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+.container-form {
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.form-control[readonly]:hover {
+    border: 1px solid #99ccff;
+    background-color: transparent;
+    color: #99ccff;
+}
+
+.form-control[readonly] {
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.form-control:focus {
+    border: 1px solid #99ccff;
+    background-color: transparent;
+    color: #99ccff;
+}
+
+.input-group-text,
+.form-control,
+.custom-btn,
+.custom-card,
+.alert-success {
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.alert-error {
+    border: 1px solid #99ccff;
+    background-color: transparent;
+    color: #99ccff;
+}
+
+.small-select {
+    width: 120px;
+}
+
+.input-group {
+    display: flex;
+    align-items: flex-start;
+}
+
+.input-group-text {
+    height: 38px;
+    line-height: 38px;
+    background-color: transparent;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.form-control.small-input {
+    width: 120px;
+}
+
+.fixed-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-group-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.params-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.params-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Cor do placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #99ccff !important;
+}
+
+/* Ajustes para `form-floating` */
+.form-floating .form-control {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.form-floating .form-control::placeholder {
+    color: #ffffff;
+}
