@@ -21,12 +21,8 @@ app.use(function (req, res, next) {
     res.locals.resultImage = req.session.resultImage;
     res.locals.name = req.session.name;
     res.locals.loggedin = req.session.loggedin;
-<<<<<<< HEAD
-    
-=======
     res.locals.user_email = req.session.user_email;
 
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
     next();
 })
 //views
@@ -35,9 +31,16 @@ app.set('view engine', 'ejs');
 app.use('/clickgenius', express.static(path.join(__dirname, "/public/click_genius")));
 app.use('/', express.static(path.join(__dirname, "/public/code_genius")));
 //routes
-app.use('/', require('./router/codeGeniusRoutes'));
 app.use('/clickgenius', require('./router/clickGeniusRoutes'));
+app.use('/', require('./router/codeGeniusRoutes'));
 //port
+app.use('/clickgenius',(req, res, next) => {
+    res.status(404).render('clickGenius/Click-404');
+});
+app.use('/',(req, res, next) => {
+    res.status(404).render('codeGenius/Code-404');
+});
+
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });

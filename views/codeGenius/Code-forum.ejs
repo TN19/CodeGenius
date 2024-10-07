@@ -3,82 +3,87 @@
 
 <head>
     <%- include('Code-head', {title: 'CodeGenius' }); %>
-        <style>
-            body {
-                background-color: #000000;
-                color: #fff;
-            }
+    <style>
+        body {
+            background-color: #000000;
+            color: #fff;
+        }
 
-            a {
-                text-decoration: none;
-                color: #0d47a1;
-            }
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
 
-            .container-forum {
-                padding: 50px 0;
-            }
+        .container-forum {
+            padding: 50px 0;
+        }
 
-            .forum-item {
-                margin-bottom: 20px;
-                padding: 20px;
-                background-color: #000000;
-                border-radius: 5px;
-                border: 1px solid #fff;
-            }
+        .forum-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 5px;
+            border: 1px solid #fff;
+        }
 
-            .forum-item h3 {
-                color: #fff;
-            }
+        .forum-item h3 {
+            color: #fff;
+        }
 
-            .forum-item .details {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+        .forum-item .details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            .forum-item .tags {
-                display: flex;
-            }
+        .forum-item .tags {
+            display: flex;
+        }
 
-            .forum-item .tags span {
-                margin-right: 10px;
-                background-color: #fff;
-                color: #000000;
-                padding: 5px 10px;
-                border-radius: 5px;
-            }
-        </style>
+        .forum-item .tags span {
+            margin-right: 10px;
+            background-color: #fff;
+            color: #000000;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .custom-btn {
+            margin-bottom: 20px; /* Adiciona um espaço abaixo do botão */
+        }
+    </style>
 </head>
 
 <body>
     <%- include('Code-header') %>
-        <main class="container">
-            <div class="container-fluid">
-                <div class="container-forum">
-                    <div class="forum-item">
-                        <a href="/courseGenius">
-                            <h3>Question for PHP</h3>
-                        </a>
-                        <div class="details">
-                            <div class="stats">
-                                <span>7 answer</span>
-                            </div>
+    <main class="container">
+        <div class="container-fluid">
+            <div class="container-forum text-center">
+                <a href="/ask" class="btn btn-primary custom-btn">Adicionar Nova Pergunta</a>
+                <div class="forum-item">
+                    <a href="/forum/1">
+                        <h3>Question for PHP</h3>
+                    </a>
+                    <div class="details">
+                        <div class="stats">
+                            <span>7 respostas</span>
                         </div>
                     </div>
-                    <div class="forum-item">
-                        <a href="/courseGenius">
-                            <h3>Question for node</h3>
-                        </a>
-                        <div class="details">
-                            <div class="stats">
-                                <span>5 answer</span>
-                            </div>
+                </div>
+                <div class="forum-item">
+                    <a href="/forum/2">
+                        <h3>Question for Node</h3>
+                    </a>
+                    <div class="details">
+                        <div class="stats">
+                            <span>5 respostas</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-        <%- include('Code-footer') %>
+        </div>
+    </main>
+    <%- include('Code-footer') %>
 </body>
 
 </html>

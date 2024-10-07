@@ -4,10 +4,6 @@ const express = require('express');
 const router = express.Router();
 const request = require('postman-request');
 const bcrypt = require('bcrypt');
-<<<<<<< HEAD
-const saltRounds = 10;
-
-=======
 const fs = require('fs')
 const saltRounds = 10;
 
@@ -32,7 +28,6 @@ function handlePostRequest(url, data) {
     });
 }
 
-
 function handleGetRequest(url) {
     console.log("handleGetRequest");
     return new Promise((resolve, reject) => {
@@ -53,17 +48,10 @@ function handleGetRequest(url) {
     });
 }
 
-
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
 router.get('/', (req, res) => {
     res.render('clickGenius/Click-home')
 });
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
 router.route('/sign-up')
     .get((req, res) => {
         res.render('clickGenius/Click-sign-up');
@@ -230,141 +218,34 @@ router.route('/my-click')
     })
     .post((req, res) => {
         let test_error = false;
-<<<<<<< HEAD
-        let tests = [];
-        let untestedDomains = [];
-
-=======
         const tests = [];
         const formPromises = [];
     
         console.log('Iniciando o POST request...');
     
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
         const sqlQuery = `
             SELECT 
                 domain.domain, 
                 domain.id AS domain_id,
-<<<<<<< HEAD
-                clicks.urls AS testUrl
-=======
                 clicks.id AS clicks_id,
                 clicks.urls AS testUrl,
                 clicks.method
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
             FROM users
             INNER JOIN user_click ON users.id = user_click.id_user
             INNER JOIN clicks ON user_click.id_click = clicks.id
             INNER JOIN domain ON clicks.id_domain = domain.id
-<<<<<<< HEAD
-            WHERE users.id = ? and domain.id = ?;
-        `;
-
-=======
             WHERE users.id = ? AND domain.id = ?;
         `;
     
         console.log("ID usuário:", req.session.user_id);
         console.log("ID domínio:", req.body.domain_id);
     
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
         db.query(sqlQuery, [req.session.user_id, req.body.domain_id], (error, results) => {
             if (error) {
                 console.error('Erro ao executar a consulta SQL:', error);
                 res.status(500).send('Erro ao processar a requisição.');
                 return;
             }
-<<<<<<< HEAD
-
-            results.forEach((row) => {
-                const domain = row.domain;
-                const domain_id = row.domain_id;
-                const testUrl = row.testUrl;
-                let resultImage = '';
-                let existingDomain = tests.find((item) => item.domain === domain);
-
-                if (!existingDomain) {
-                    existingDomain = { domain, domain_id, tests: [], resultImages: [] };
-                    tests.push(existingDomain);
-                }
-
-                existingDomain.tests.push({ testUrl });
-                existingDomain.resultImages.push({ resultImage });
-            });
-
-            console.log('Tests:', tests);
-
-            const requests = tests.map((test) => {
-                return new Promise((resolve) => {
-                    test.tests.forEach((singleTest, index) => {
-                        const url = test.domain + singleTest.testUrl;
-                        const method = req.body.methods[index]; // Assuming `methods` is passed in the same order as `tests`
-
-                        console.log('URL:', url, 'Method:', method);
-
-                        const requestPromise = method === 'post' ? handlePostRequest(url, formData) : handleGetRequest(url);
-
-                        requestPromise.then((resultImage) => {
-                            singleTest.resultImage = resultImage;
-                            resolve();
-                        }).catch((error) => {
-                            console.error('Request error:', error);
-                            singleTest.resultImage = 'images/bootstrap icons/error.svg';
-                            test_error = true;
-                            resolve();
-                        });
-                    });
-                });
-            });
-
-            Promise.all(requests).then(() => {
-                const sqlQueryUntested = `
-                    SELECT 
-                        domain.domain, 
-                        domain.id AS domain_id,
-                        clicks.urls AS testUrl
-                    FROM users
-                    INNER JOIN user_click ON users.id = user_click.id_user
-                    INNER JOIN clicks ON user_click.id_click = clicks.id
-                    INNER JOIN domain ON clicks.id_domain = domain.id
-                    WHERE users.id = ? and domain.id != ?;
-                `;
-
-                db.query(sqlQueryUntested, [req.session.user_id, req.body.domain_id], (error, resultsUntested) => {
-                    if (error) {
-                        console.error('Erro ao executar a segunda consulta SQL:', error);
-                        res.status(500).send('Erro ao processar a requisição.');
-                        return;
-                    }
-
-                    resultsUntested.forEach((row) => {
-                        const domain_id = row.domain_id;
-                        const domain = row.domain;
-                        const testUrl = row.testUrl;
-
-                        let existingDomain = tests.find((item) => item.domain === domain && item.domain_id === domain_id);
-
-                        if (!existingDomain) {
-                            existingDomain = { domain, domain_id, tests: [] };
-                            tests.push(existingDomain);
-                        }
-
-                        existingDomain.tests.push({ testUrl });
-                    });
-
-                    console.log('Untested Domains:', untestedDomains);
-
-                    console.log('Test Error:', test_error);
-                    console.log(tests)
-                    if (test_error) {
-                        res.render('clickGenius/Click-my-click', { error: 'Test error...', tests });
-                    } else {
-                        res.render('clickGenius/Click-my-click', { success: 'Test completed successfully!!!', tests });
-                    }
-                });
-            }).catch((error) => {
-                console.error(error);
-=======
     
             results.forEach((row) => {
                 const domain_id = row.domain_id;
@@ -558,19 +439,11 @@ router.route('/my-click')
                 });
             }).catch((error) => {
                 console.error('Erro ao processar a requisição:', error);
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
                 res.status(500).send('Erro ao processar a requisição.');
             });
         });
     });
-<<<<<<< HEAD
-=======
     
-
-
->>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
-
-
 router.route('/add-click')
     .get((req, res) => {
         res.render('clickGenius/Click-add-click');
@@ -718,6 +591,5 @@ router.route('/add-click')
             }
         });
     });
-
 
 module.exports = router;
