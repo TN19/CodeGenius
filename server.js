@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
     res.locals.name = req.session.name;
     res.locals.loggedin = req.session.loggedin;
     res.locals.user_email = req.session.user_email;
+<<<<<<< HEAD
     res.locals.msgError = req.session.msgError;
     res.locals.support = req.session.support;
 
@@ -31,6 +32,9 @@ app.use(function (req, res, next) {
     res.locals.admin_email = req.session.admin_email
     
    
+=======
+
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
     next();
 })
 //views
@@ -41,8 +45,8 @@ app.use('/clickgenius', express.static(path.join(__dirname, "/public/click_geniu
 app.use('/admin', express.static(path.join(__dirname, "/public/admin")));
 
 //routes
-app.use('/', require('./router/codeGeniusRoutes'));
 app.use('/clickgenius', require('./router/clickGeniusRoutes'));
+<<<<<<< HEAD
 app.use('/admin', require('./router/adminRoutes'));
 
 //port
@@ -57,6 +61,17 @@ app.use('/admin',(req, res, next) => {
 });
 
 
+=======
+app.use('/', require('./router/codeGeniusRoutes'));
+//port
+app.use('/clickgenius',(req, res, next) => {
+    res.status(404).render('clickGenius/Click-404');
+});
+app.use('/',(req, res, next) => {
+    res.status(404).render('codeGenius/Code-404');
+});
+
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });

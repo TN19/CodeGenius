@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -8,11 +9,14 @@ router.route('/home')
     .get((req, res) => {
         res.redirect('/')
     })
+=======
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
 
 router.get('/', (req, res) => {
     res.render('codeGenius/Code-home')
 });
 
+<<<<<<< HEAD
 router.route('/sign-up')
     .get((req, res) => {
         res.render('codeGenius/Code-sign-up')
@@ -93,6 +97,27 @@ router.route('/faq')
     })
 
 
+=======
+router.route('/logout')
+    .get((req, res) => {
+        req.session.destroy();
+        res.redirect('/')
+    })
+
+
+router.route('/about')
+    .get((req, res) => {
+        res.render('codeGenius/Code-about')
+    })
+
+
+router.route('/faq')
+    .get((req, res) => {
+        res.render('codeGenius/Code-faq')
+    })
+
+
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
 router.route('/forum')
     .get((req, res) => {
         res.render('codeGenius/Code-forum')
@@ -101,6 +126,7 @@ router.route('/forum')
 
     })
 
+<<<<<<< HEAD
 router.route('/forum/:id')
     .get((req, res) => {
         res.render('codeGenius/Code-forum-details')
@@ -109,11 +135,14 @@ router.route('/forum/:id')
 
     })
 
+=======
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
 router.route('/ask')
     .get((req, res) => {
         res.render('codeGenius/Code-ask')
     })
     .post((req, res) => {
+<<<<<<< HEAD
         const { title, content } = req.body
         try {
             const sql = 'INSERT INTO forum (id_user, title, content) VALUES (?, ?, ?)';
@@ -131,6 +160,9 @@ router.route('/ask')
             console.error(err);
             res.status(500).send('Error');
         }
+=======
+
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
     })
 
 router.route('/support')
@@ -138,6 +170,7 @@ router.route('/support')
         res.render('codeGenius/Code-support')
     })
     .post((req, res) => {
+<<<<<<< HEAD
         const { title, content } = req.body
         try {
             const sql = 'INSERT INTO support (id_user, title, content) VALUES (?, ?, ?)';
@@ -155,6 +188,30 @@ router.route('/support')
             console.error(err);
             res.status(500).send('Error');
         }
+=======
+
+    })
+
+router.route('/home')
+    .get((req, res) => {
+        res.redirect('/')
+    })
+
+
+router.route('/sign-in')
+    .get((req, res) => {
+        res.render('codeGenius/Code-sign-in')
+    })
+    .post((req, res) => {
+
+    })
+
+router.route('/sign-up')
+    .get((req, res) => {
+        res.render('codeGenius/Code-sign-up')
+    })
+    .post((req, res) => {
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
 
     })
 

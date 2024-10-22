@@ -67,9 +67,21 @@ connection.connect((err) => {
         `CREATE TABLE IF NOT EXISTS user_click (
           id INT PRIMARY KEY AUTO_INCREMENT,
           id_user INT NOT NULL,
+<<<<<<< HEAD
           id_click INT NOT NULL,
           FOREIGN KEY (id_user) REFERENCES users(id),
           FOREIGN KEY (id_click) REFERENCES clicks(id)
+=======
+<<<<<<< HEAD
+          id_clicks INT NOT NULL,
+          FOREIGN KEY (id_user) REFERENCES users(id),
+          FOREIGN KEY (id_clicks) REFERENCES clicks(id)
+=======
+          id_click INT NOT NULL,
+          FOREIGN KEY (id_user) REFERENCES users(id),
+          FOREIGN KEY (id_click) REFERENCES clicks(id)
+>>>>>>> 5170cdf (correção de função principal e estilzação de codeGenius)
+>>>>>>> 971d626bfe664499af6426e1b173ffe82586d8df
         )`,
         `CREATE TABLE IF NOT EXISTS administrator (
           id INT PRIMARY KEY AUTO_INCREMENT,
