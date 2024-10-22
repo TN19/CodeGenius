@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('Admin-head', {title: 'CodeGenius: Become an IT genius' }); %>
+</head>
+
+<body>
+    <main class="container">
+        <div class="container py-5">
+            <div class="row mb-4">
+                <h2 class="display-4">
+                    <% if(support){ %>
+                        <%= support %>
+                    <% }else{ %>
+                        Support
+                    <% } %>
+                </h2>
+                <div class="card mb-4 shadow-sm custom-card">
+                    <div class="card-body">
+                        <h3 class="card-title">Estou com problema de acesso na conta</h3>
+                        <p class="card-text">Na hora de logar está aparecendo code status 500, e não consigar entrar</p>
+                        <a href="/admin/support/1" class="btn btn-primary custom-btn"
+                            target="_blank">Response</a>
+                    </div>
+                </div>
+                <div class="card mb-4 shadow-sm custom-card">
+                    <div class="card-body">
+                        <h3 class="card-title">Estou com problema para cadastrar automação de teste</h3>
+                        <p class="card-text">Não está aparecendo os automação de teste cadastrado no myclicks</p>
+                        <a href="/admin/support/1" class="btn btn-primary custom-btn"
+                            target="_blank">Response</a>
+                    </div>
+                </div>
+                <div class="card mb-4 shadow-sm custom-card">
+                    <div class="card-body">
+                        <h3 class="card-title">Não consigo resolver um interrogação ao realizar automação de teste</h3>
+                        <p class="card-text">Tem uma automação de teste que sempre aparece como erro, e aparece mensagem de erro de página não encontrado, não sei como resolver</p>
+                        <a href="/admin/support/1" class="btn btn-primary custom-btn"
+                            target="_blank">Response</a>
+                    </div>
+                </div>
+                <% if (support && support.length> 0) { %>
+                    <% support.forEach(function (support_ask) { %>
+                        <div class="card mb-4 shadow-sm custom-card">
+                            <div class="card-body">
+                                <h3 class="card-title"><%= support_ask.title %></h3>
+                                <p class="card-text"><%= support_ask.content %></p>
+                                <a href="/admin/support/<%= support_ask.id %>" class="btn btn-primary custom-btn"
+                                    target="_blank">Response</a>
+                            </div>
+                        </div>
+                        <% }) %>
+                            <% } %>
+            </div>
+            <hr>
+        </div>
+    </main>
+</body>
+
+</html>

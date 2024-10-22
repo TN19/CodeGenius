@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include('Code-head', {title: 'CodeGenius' }); %>
+    <style>
+        body {
+            background-color: #000000;
+            color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .container-forum {
+            padding: 50px 0;
+        }
+
+        .forum-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 5px;
+            border: 1px solid #fff;
+        }
+
+        .forum-item h3 {
+            color: #fff;
+        }
+
+        .forum-item .details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .forum-item .tags {
+            display: flex;
+        }
+
+        .forum-item .tags span {
+            margin-right: 10px;
+            background-color: #fff;
+            color: #000000;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .custom-btn {
+            margin-bottom: 20px; /* Adiciona um espaço abaixo do botão */
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('Code-header') %>
+    <main class="container">
+        <div class="container-fluid">
+            <div class="container-forum text-center">
+                <div class="forum-item">
+                    <a href="/forum/1">
+                        <h3>Problema com node</h3>
+                    </a>
+                    <div class="details">
+                        <div class="stats">
+                            <span>Eu não sei como iniciar um projeto de node</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="/ask" class="btn btn-primary custom-btn">Add new response</a>
+                <div class="forum-item">
+                    <div class="details">
+                        <div class="stats">
+                            <span>Digite npm init no terminal para iniciar projeto</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item">
+                    <div class="details">
+                        <div class="stats">
+                            <span>Tu precisa saber no minimo o conceito de MVC para iniciar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item">
+                    <div class="details">
+                        <div class="stats">
+                            <span>Tu já tem arquivo package.json?</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item">
+                    <div class="details">
+                        <div class="stats">
+                            <span>Tem que instalar primeiro node.js né</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item">
+                    <div class="details">
+                        <div class="stats">
+                            <span>Se for fazer uns sites que não for só crud vai ter que aprender outros APIs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item">
+                    <div class="details">
+                        <div class="stats">
+                            <span>Tem que fazer um sistema de login e cadastro e por final um crud</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item">
+                    <div class="details">
+                        <div class="stats">
+                            <span>Tu precisa saber no minimo o conceito de MVC para iniciar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('Code-footer') %>
+</body>
+
+</html>

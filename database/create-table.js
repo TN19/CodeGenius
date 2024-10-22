@@ -67,9 +67,9 @@ connection.connect((err) => {
         `CREATE TABLE IF NOT EXISTS user_click (
           id INT PRIMARY KEY AUTO_INCREMENT,
           id_user INT NOT NULL,
-          id_clicks INT NOT NULL,
+          id_click INT NOT NULL,
           FOREIGN KEY (id_user) REFERENCES users(id),
-          FOREIGN KEY (id_clicks) REFERENCES clicks(id)
+          FOREIGN KEY (id_click) REFERENCES clicks(id)
         )`,
         `CREATE TABLE IF NOT EXISTS administrator (
           id INT PRIMARY KEY AUTO_INCREMENT,
